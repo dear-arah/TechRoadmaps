@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Career & Certification Roadmaps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab-button {
+            transition: all 0.2s ease;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #80A1BA 0%, #578FCA 100%);
+            color: white;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #074799 10%, #D1F8EF 90%);
+        }
+
+        .icon-badge {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 28px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .roadmap-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .roadmap-left-panel {
+            width: 30%;
+            flex-shrink: 0;
+            background-color: white;
+            border-right: 1px solid #e2e8f0;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .roadmap-step {
+            position: relative;
+            padding-left: 1.5rem;
+            padding-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .roadmap-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            bottom: 0px;
+            left: 0.2rem;
+            width: 2px;
+            background-color: #cbd5e1;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid white;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .roadmap-dot.active {
+            background-color: #33A1E0;
+        }
+
+        .roadmap-dot.completed {
+            background-color: #10b981;
+        }
+
+        .roadmap-main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            background-color: #f7fafc;
+            min-width: 0;
+        }
+
+        .detail-card {
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .roadmap-body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 roadmap-body">
+    <div id="app"></div>
+
+    <script>
+        const createSlug = (text) => text.toLowerCase().replace(/\s/g, '-').replace(/[^\w-]+/g, '');
+
+        const ROADMAP_DATA = {
+            careerPaths: [
+                {
+                    id: 'software-engineering',
+                    title: 'Software Engineering',
+                    icon: '💻',
+                    color: 'from-blue-400 to-blue-800',
+                    description: 'Build scalable applications and systems, mastering the full development lifecycle from design to deployment.',
+                    skills: ['JavaScript', 'Python', 'Java', 'C++', 'Git', 'SQL', 'System Design', 'Testing', 'Cloud Computing'],
+                    avgSalary: '$95,000 - $150,000',
+                    experienceLevel: 'Beginner to Advanced',
+                    duration: '6-12 months',
+                    modules: 9,
+                    learningPath: [
+                        {
+                            title: 'Programming Fundamentals',
+                            shortDesc: 'Understanding core programming concepts and syntax.',
+                            subGoals: [
+                                {
+                                    title: 'Learn Python Basics (Syntax, Variables, Loops, Functions)',
+                                    resources: [
+                                        { name: 'Python Official Tutorial', url: 'https://docs.python.org/3/tutorial/' },
+                                        { name: 'Automate the Boring Stuff with Python', url: 'https://automatetheboringstuff.com/' },
+                                        { name: 'Codecademy Python Course', url: 'https://www.codecademy.com/learn/learn-python-3' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master JavaScript Fundamentals',
+                                    resources: [
+                                        { name: 'MDN JavaScript Guide', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide' },
+                                        { name: 'JavaScript.info', url: 'https://javascript.info/' },
+                                        { name: 'FreeCodeCamp JavaScript', url: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn Java/C++ (Choose one)',
+                                    resources: [
+                                        { name: 'Oracle Java Tutorials', url: 'https://docs.oracle.com/javase/tutorial/' },
+                                        { name: 'Learn C++ - LearnCpp.com', url: 'https://www.learncpp.com/' },
+                                        { name: 'Coursera Java Programming', url: 'https://www.coursera.org/specializations/java-programming' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Understand Variables, Data Types & Control Flow',
+                                    resources: [
+                                        { name: 'CS50x Harvard Introduction', url: 'https://cs50.harvard.edu/x/' },
+                                        { name: 'W3Schools Programming Basics', url: 'https://www.w3schools.com/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Data Structures & Algorithms',
+                            shortDesc: 'Master essential data structures and algorithmic problem-solving.',
+                            subGoals: [
+                                {
+                                    title: 'Learn Big-O Notation & Time Complexity',
+                                    resources: [
+                                        { name: 'Big-O Cheat Sheet', url: 'https://www.bigocheatsheet.com/' },
+                                        { name: 'Khan Academy Algorithms', url: 'https://www.khanacademy.org/computing/computer-science/algorithms' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master Arrays, Linked Lists, Stacks & Queues',
+                                    resources: [
+                                        { name: 'GeeksforGeeks Data Structures', url: 'https://www.geeksforgeeks.org/data-structures/' },
+                                        { name: 'VisualGo - Visualize DS', url: 'https://visualgo.net/en' },
+                                        { name: 'FreeCodeCamp DS Course', url: 'https://www.freecodecamp.org/news/learn-data-structures-and-algorithms/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Understand Trees, Graphs & Hash Tables',
+                                    resources: [
+                                        { name: 'GeeksforGeeks Trees', url: 'https://www.geeksforgeeks.org/binary-tree-data-structure/' },
+                                        { name: 'Graph Theory Tutorial', url: 'https://www.programiz.com/dsa/graph' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Practice Sorting & Searching Algorithms',
+                                    resources: [
+                                        { name: 'Sorting Algorithms Visualized', url: 'https://visualgo.net/en/sorting' },
+                                        { name: 'LeetCode Explore', url: 'https://leetcode.com/explore/' },
+                                        { name: 'HackerRank Practice', url: 'https://www.hackerrank.com/domains/algorithms' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn Recursion & Dynamic Programming',
+                                    resources: [
+                                        { name: 'Dynamic Programming - GeeksforGeeks', url: 'https://www.geeksforgeeks.org/dynamic-programming/' },
+                                        { name: 'AlgoExpert', url: 'https://www.algoexpert.io/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Object-Oriented Programming (OOP)',
+                            shortDesc: 'Learn OOP principles and design patterns.',
+                            subGoals: [
+                                {
+                                    title: 'Understand Classes, Objects & Inheritance',
+                                    resources: [
+                                        { name: 'Oracle Java OOP Concepts', url: 'https://docs.oracle.com/javase/tutorial/java/concepts/' },
+                                        { name: 'Python OOP Tutorial', url: 'https://realpython.com/python3-object-oriented-programming/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master Polymorphism & Encapsulation',
+                                    resources: [
+                                        { name: 'OOP Principles - GeeksforGeeks', url: 'https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/' },
+                                        { name: 'Programiz OOP', url: 'https://www.programiz.com/python-programming/object-oriented-programming' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn Design Patterns (Singleton, Factory, Observer)',
+                                    resources: [
+                                        { name: 'Refactoring Guru Design Patterns', url: 'https://refactoring.guru/design-patterns' },
+                                        { name: 'Head First Design Patterns (Book)', url: 'https://www.oreilly.com/library/view/head-first-design/0596007124/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Version Control & Collaboration',
+                            shortDesc: 'Managing and collaborating on projects with Git.',
+                            subGoals: [
+                                {
+                                    title: 'Learn Git Basics (commit, branch, merge)',
+                                    resources: [
+                                        { name: 'Git Official Documentation', url: 'https://git-scm.com/doc' },
+                                        { name: 'Atlassian Git Tutorials', url: 'https://www.atlassian.com/git/tutorials' },
+                                        { name: 'GitHub Git Handbook', url: 'https://guides.github.com/introduction/git-handbook/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master Pull Requests & Code Reviews',
+                                    resources: [
+                                        { name: 'GitHub Pull Request Guide', url: 'https://docs.github.com/en/pull-requests' },
+                                        { name: 'Git Branching Strategies', url: 'https://www.atlassian.com/git/tutorials/comparing-workflows' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Handle Merge Conflicts & Rebasing',
+                                    resources: [
+                                        { name: 'Git Conflict Resolution', url: 'https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts' },
+                                        { name: 'Learn Git Branching (Interactive)', url: 'https://learngitbranching.js.org/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Databases & SQL',
+                            shortDesc: 'Learn database design, queries, and management.',
+                            subGoals: [
+                                {
+                                    title: 'Learn SQL Basics (SELECT, INSERT, UPDATE, DELETE)',
+                                    resources: [
+                                        { name: 'SQLZoo Interactive Tutorial', url: 'https://sqlzoo.net/' },
+                                        { name: 'Mode Analytics SQL Tutorial', url: 'https://mode.com/sql-tutorial/' },
+                                        { name: 'W3Schools SQL', url: 'https://www.w3schools.com/sql/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Understand Relational Databases (PostgreSQL, MySQL)',
+                                    resources: [
+                                        { name: 'PostgreSQL Tutorial', url: 'https://www.postgresqltutorial.com/' },
+                                        { name: 'MySQL Documentation', url: 'https://dev.mysql.com/doc/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn NoSQL Databases (MongoDB, Redis)',
+                                    resources: [
+                                        { name: 'MongoDB University', url: 'https://university.mongodb.com/' },
+                                        { name: 'Redis Documentation', url: 'https://redis.io/docs/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Database Design & Normalization',
+                                    resources: [
+                                        { name: 'Database Normalization Explained', url: 'https://www.guru99.com/database-normalization.html' },
+                                        { name: 'SQL Database Design', url: 'https://www.geeksforgeeks.org/introduction-of-database-normalization/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Software Testing & Debugging',
+                            shortDesc: 'Write tests and debug code effectively.',
+                            subGoals: [
+                                {
+                                    title: 'Learn Unit Testing (JUnit, pytest)',
+                                    resources: [
+                                        { name: 'JUnit 5 User Guide', url: 'https://junit.org/junit5/docs/current/user-guide/' },
+                                        { name: 'Pytest Documentation', url: 'https://docs.pytest.org/' },
+                                        { name: 'Unit Testing Best Practices', url: 'https://www.freecodecamp.org/news/unit-testing-best-practices/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master Test-Driven Development (TDD)',
+                                    resources: [
+                                        { name: 'TDD Introduction - Martin Fowler', url: 'https://martinfowler.com/bliki/TestDrivenDevelopment.html' },
+                                        { name: 'TDD Tutorial', url: 'https://www.guru99.com/test-driven-development.html' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn Debugging with IDE Tools',
+                                    resources: [
+                                        { name: 'VS Code Debugging Guide', url: 'https://code.visualstudio.com/docs/editor/debugging' },
+                                        { name: 'IntelliJ IDEA Debugger', url: 'https://www.jetbrains.com/help/idea/debugging-code.html' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Integration & End-to-End Testing',
+                                    resources: [
+                                        { name: 'Selenium Testing', url: 'https://www.selenium.dev/documentation/' },
+                                        { name: 'Cypress E2E Testing', url: 'https://www.cypress.io/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Software Architecture & System Design',
+                            shortDesc: 'Design scalable and maintainable systems.',
+                            subGoals: [
+                                {
+                                    title: 'Understand MVC, Microservices & Monoliths',
+                                    resources: [
+                                        { name: 'System Design Primer (GitHub)', url: 'https://github.com/donnemartin/system-design-primer' },
+                                        { name: 'Microservices Architecture', url: 'https://microservices.io/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn REST API Design Principles',
+                                    resources: [
+                                        { name: 'REST API Tutorial', url: 'https://restfulapi.net/' },
+                                        { name: 'Microsoft API Design Guide', url: 'https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master Scalability, Load Balancing & Caching',
+                                    resources: [
+                                        { name: 'System Design Interview Prep', url: 'https://www.educative.io/courses/grokking-the-system-design-interview' },
+                                        { name: 'Web Scalability for Startup Engineers (Book)', url: 'https://www.amazon.com/Scalability-Startup-Engineers-Artur-Ejsmont/dp/0071843655' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Study Design Patterns in System Architecture',
+                                    resources: [
+                                        { name: 'Microsoft Architecture Guide', url: 'https://learn.microsoft.com/en-us/azure/architecture/guide/' },
+                                        { name: 'Martin Fowler - Architecture', url: 'https://martinfowler.com/architecture/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Cloud Computing & DevOps',
+                            shortDesc: 'Deploy applications and automate infrastructure.',
+                            subGoals: [
+                                {
+                                    title: 'Learn Docker Basics & Containerization',
+                                    resources: [
+                                        { name: 'Docker Getting Started', url: 'https://docs.docker.com/get-started/' },
+                                        { name: 'Docker Curriculum', url: 'https://docker-curriculum.com/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Understand CI/CD Pipelines (GitHub Actions, Jenkins)',
+                                    resources: [
+                                        { name: 'GitHub Actions Documentation', url: 'https://docs.github.com/en/actions' },
+                                        { name: 'Jenkins Tutorial', url: 'https://www.jenkins.io/doc/tutorials/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Learn Cloud Platforms (AWS, Azure, GCP)',
+                                    resources: [
+                                        { name: 'AWS Free Tier & Tutorials', url: 'https://aws.amazon.com/free/' },
+                                        { name: 'Azure Fundamentals', url: 'https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/' },
+                                        { name: 'Google Cloud Skills Boost', url: 'https://www.cloudskillsboost.google/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master Kubernetes Basics',
+                                    resources: [
+                                        { name: 'Kubernetes Official Docs', url: 'https://kubernetes.io/docs/tutorials/' },
+                                        { name: 'KodeKloud Kubernetes Course', url: 'https://kodekloud.com/courses/kubernetes-for-the-absolute-beginners/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'AI Tools & Modern Development',
+                            shortDesc: 'Leverage AI to enhance productivity and efficiency.',
+                            subGoals: [
+                                {
+                                    title: 'Use AI Assistants (ChatGPT, Claude, Gemini)',
+                                    resources: [
+                                        { name: 'ChatGPT for Developers', url: 'https://platform.openai.com/docs/' },
+                                        { name: 'Prompt Engineering Guide', url: 'https://www.promptingguide.ai/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Master AI Copilots (GitHub Copilot, Tabnine)',
+                                    resources: [
+                                        { name: 'GitHub Copilot Docs', url: 'https://docs.github.com/en/copilot' },
+                                        { name: 'Tabnine AI', url: 'https://www.tabnine.com/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Explore AI Code Editors (Cursor, Windsurf)',
+                                    resources: [
+                                        { name: 'Cursor AI Editor', url: 'https://cursor.sh/' },
+                                        { name: 'AI Development Tools Guide', url: 'https://github.com/e2b-dev/awesome-ai-agents' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'ai-engineer',
+                    title: 'AI Engineer',
+                    icon: '🤖',
+                    color: 'from-yellow-400 to-yellow-600',
+                    description: 'Design and build intelligent systems using machine learning, deep learning, and generative AI to solve complex real-world problems.',
+                    skills: ['Python', 'Machine Learning', 'Deep Learning', 'NLP', 'Computer Vision', 'TensorFlow', 'PyTorch', 'LLMs', 'MLOps'],
+                    avgSalary: '$110,000 - $180,000',
+                    experienceLevel: 'Intermediate to Advanced',
+                    duration: '8-12 months',
+                    modules: 10,
+                    learningPath: [
+                        {
+                            title: 'Mathematics for AI',
+                            shortDesc: 'Master essential mathematical foundations for machine learning.',
+                            subGoals: [
+                                {
+                                    title: 'Linear Algebra (Matrices, Vectors, Eigenvalues)',
+                                    resources: [
+                                        { name: '3Blue1Brown Linear Algebra', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab' },
+                                        { name: 'Khan Academy Linear Algebra', url: 'https://www.khanacademy.org/math/linear-algebra' },
+                                        { name: 'MIT OCW Linear Algebra', url: 'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Calculus (Derivatives, Gradients, Chain Rule)',
+                                    resources: [
+                                        { name: '3Blue1Brown Calculus', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr' },
+                                        { name: 'Khan Academy Calculus', url: 'https://www.khanacademy.org/math/calculus-1' },
+                                        { name: "Paul's Online Math Notes", url: 'https://tutorial.math.lamar.edu/classes/calcI/calcI.aspx' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Probability & Statistics',
+                                    resources: [
+                                        { name: 'StatQuest YouTube Channel', url: 'https://www.youtube.com/c/joshstarmer' },
+                                        { name: 'Khan Academy Statistics', url: 'https://www.khanacademy.org/math/statistics-probability' },
+                                        { name: 'Think Stats (Free Book)', url: 'https://greenteapress.com/thinkstats2/html/index.html' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Optimization Theory',
+                                    resources: [
+                                        { name: 'Convex Optimization - Stanford', url: 'https://web.stanford.edu/~boyd/cvxbook/' },
+                                        { name: 'Gradient Descent Explained', url: 'https://www.youtube.com/watch?v=sDv4f4s2SB8' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Python for AI & Data Science',
+                            shortDesc: 'Master Python programming and essential libraries for AI.',
+                            subGoals: [
+                                {
+                                    title: 'Python Fundamentals & OOP',
+                                    resources: [
+                                        { name: 'Python Official Tutorial', url: 'https://docs.python.org/3/tutorial/' },
+                                        { name: 'Real Python Tutorials', url: 'https://realpython.com/' },
+                                        { name: 'Automate the Boring Stuff', url: 'https://automatetheboringstuff.com/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'NumPy for Numerical Computing',
+                                    resources: [
+                                        { name: 'NumPy Official Quickstart', url: 'https://numpy.org/doc/stable/user/quickstart.html' },
+                                        { name: 'NumPy Tutorial - CS231n', url: 'https://cs231n.github.io/python-numpy-tutorial/' },
+                                        { name: 'Real Python NumPy Guide', url: 'https://realpython.com/numpy-tutorial/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Pandas for Data Manipulation',
+                                    resources: [
+                                        { name: 'Pandas Official Documentation', url: 'https://pandas.pydata.org/docs/getting_started/index.html' },
+                                        { name: 'Kaggle Pandas Course', url: 'https://www.kaggle.com/learn/pandas' },
+                                        { name: '10 Minutes to Pandas', url: 'https://pandas.pydata.org/docs/user_guide/10min.html' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Matplotlib & Seaborn for Visualization',
+                                    resources: [
+                                        { name: 'Matplotlib Tutorials', url: 'https://matplotlib.org/stable/tutorials/index.html' },
+                                        { name: 'Seaborn Tutorial', url: 'https://seaborn.pydata.org/tutorial.html' },
+                                        { name: 'Python Graph Gallery', url: 'https://python-graph-gallery.com/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Machine Learning Fundamentals',
+                            shortDesc: 'Learn core ML algorithms and model training.',
+                            subGoals: [
+                                {
+                                    title: 'Supervised Learning (Regression, Classification)',
+                                    resources: [
+                                        { name: 'Andrew Ng - Machine Learning (Coursera)', url: 'https://www.coursera.org/learn/machine-learning' },
+                                        { name: 'Scikit-learn Documentation', url: 'https://scikit-learn.org/stable/user_guide.html' },
+                                        { name: 'Google ML Crash Course', url: 'https://developers.google.com/machine-learning/crash-course' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Unsupervised Learning (Clustering, Dimensionality Reduction)',
+                                    resources: [
+                                        { name: 'StatQuest - PCA', url: 'https://www.youtube.com/watch?v=FgakZw6K1QQ' },
+                                        { name: 'K-Means Clustering Tutorial', url: 'https://scikit-learn.org/stable/modules/clustering.html' },
+                                        { name: 'Dimensionality Reduction Guide', url: 'https://www.kaggle.com/code/arthurtok/principal-component-analysis-with-kmeans-visuals' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Model Evaluation & Validation',
+                                    resources: [
+                                        { name: 'Cross-Validation Explained', url: 'https://scikit-learn.org/stable/modules/cross_validation.html' },
+                                        { name: 'Confusion Matrix & Metrics', url: 'https://www.youtube.com/watch?v=Kdsp6soqA7o' },
+                                        { name: 'ROC & AUC Curves', url: 'https://www.youtube.com/watch?v=4jRBRDbJemM' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Feature Engineering & Selection',
+                                    resources: [
+                                        { name: 'Feature Engineering for ML (Book)', url: 'https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/' },
+                                        { name: 'Kaggle Feature Engineering', url: 'https://www.kaggle.com/learn/feature-engineering' },
+                                        { name: 'Feature Selection Techniques', url: 'https://machinelearningmastery.com/feature-selection-with-real-and-categorical-data/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Deep Learning & Neural Networks',
+                            shortDesc: 'Build and train neural networks for complex tasks.',
+                            subGoals: [
+                                {
+                                    title: 'Neural Network Fundamentals (Perceptrons, Backpropagation)',
+                                    resources: [
+                                        { name: '3Blue1Brown Neural Networks', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi' },
+                                        { name: 'Deep Learning Specialization (Coursera)', url: 'https://www.coursera.org/specializations/deep-learning' },
+                                        { name: 'Neural Networks from Scratch', url: 'https://nnfs.io/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'TensorFlow & Keras',
+                                    resources: [
+                                        { name: 'TensorFlow Official Tutorials', url: 'https://www.tensorflow.org/tutorials' },
+                                        { name: 'Keras Documentation', url: 'https://keras.io/guides/' },
+                                        { name: 'TensorFlow in Practice (Coursera)', url: 'https://www.coursera.org/professional-certificates/tensorflow-in-practice' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'PyTorch Framework',
+                                    resources: [
+                                        { name: 'PyTorch Official Tutorials', url: 'https://pytorch.org/tutorials/' },
+                                        { name: 'Fast.ai Practical Deep Learning', url: 'https://course.fast.ai/' },
+                                        { name: 'PyTorch for Deep Learning (Zero to Mastery)', url: 'https://www.learnpytorch.io/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Convolutional Neural Networks (CNNs)',
+                                    resources: [
+                                        { name: 'Stanford CS231n - CNNs', url: 'http://cs231n.stanford.edu/' },
+                                        { name: 'CNN Explainer (Interactive)', url: 'https://poloclub.github.io/cnn-explainer/' },
+                                        { name: 'PyTorch CNN Tutorial', url: 'https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Recurrent Neural Networks (RNNs, LSTMs)',
+                                    resources: [
+                                        { name: 'Understanding LSTM Networks', url: 'https://colah.github.io/posts/2015-08-Understanding-LSTMs/' },
+                                        { name: 'RNN Tutorial - TensorFlow', url: 'https://www.tensorflow.org/guide/keras/rnn' },
+                                        { name: 'Sequence Models (Coursera)', url: 'https://www.coursera.org/learn/nlp-sequence-models' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Natural Language Processing (NLP)',
+                            shortDesc: 'Process and understand human language with AI.',
+                            subGoals: [
+                                {
+                                    title: 'Text Preprocessing & Tokenization',
+                                    resources: [
+                                        { name: 'NLTK Documentation', url: 'https://www.nltk.org/' },
+                                        { name: 'spaCy Tutorial', url: 'https://spacy.io/usage/spacy-101' },
+                                        { name: 'Text Preprocessing Guide', url: 'https://www.kaggle.com/code/sudalairajkumar/getting-started-with-text-preprocessing' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Word Embeddings (Word2Vec, GloVe)',
+                                    resources: [
+                                        { name: 'Word2Vec Tutorial', url: 'https://www.tensorflow.org/tutorials/text/word2vec' },
+                                        { name: 'GloVe Explained', url: 'https://nlp.stanford.edu/projects/glove/' },
+                                        { name: 'Jay Alammar - Word Embeddings', url: 'https://jalammar.github.io/illustrated-word2vec/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Transformers & Attention Mechanism',
+                                    resources: [
+                                        { name: 'The Illustrated Transformer', url: 'https://jalammar.github.io/illustrated-transformer/' },
+                                        { name: 'Attention is All You Need (Paper)', url: 'https://arxiv.org/abs/1706.03762' },
+                                        { name: 'Hugging Face NLP Course', url: 'https://huggingface.co/learn/nlp-course/chapter1/1' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Hugging Face & Pretrained Models',
+                                    resources: [
+                                        { name: 'Hugging Face Documentation', url: 'https://huggingface.co/docs' },
+                                        { name: 'Transformers Library Guide', url: 'https://huggingface.co/docs/transformers/index' },
+                                        { name: 'Fine-tuning BERT Tutorial', url: 'https://huggingface.co/docs/transformers/training' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Computer Vision',
+                            shortDesc: 'Enable machines to interpret and understand visual data.',
+                            subGoals: [
+                                {
+                                    title: 'Image Processing with OpenCV',
+                                    resources: [
+                                        { name: 'OpenCV Official Tutorials', url: 'https://docs.opencv.org/master/d9/df8/tutorial_root.html' },
+                                        { name: 'OpenCV Python Bootcamp', url: 'https://opencv.org/university/free-opencv-course/' },
+                                        { name: 'PyImageSearch Tutorials', url: 'https://pyimagesearch.com/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Object Detection (YOLO, R-CNN)',
+                                    resources: [
+                                        { name: 'YOLO Official Documentation', url: 'https://docs.ultralytics.com/' },
+                                        { name: 'Object Detection Tutorial', url: 'https://www.tensorflow.org/hub/tutorials/object_detection' },
+                                        { name: 'Detectron2 (Facebook AI)', url: 'https://github.com/facebookresearch/detectron2' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Image Segmentation',
+                                    resources: [
+                                        { name: 'U-Net for Image Segmentation', url: 'https://www.tensorflow.org/tutorials/images/segmentation' },
+                                        { name: 'Semantic Segmentation Guide', url: 'https://pytorch.org/vision/stable/models.html#semantic-segmentation' },
+                                        { name: 'Mask R-CNN Tutorial', url: 'https://github.com/matterport/Mask_RCNN' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Face Recognition & Pose Estimation',
+                                    resources: [
+                                        { name: 'Face Recognition Library', url: 'https://github.com/ageitgey/face_recognition' },
+                                        { name: 'MediaPipe Pose Detection', url: 'https://google.github.io/mediapipe/solutions/pose' },
+                                        { name: 'DeepFace Library', url: 'https://github.com/serengil/deepface' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Generative AI & Large Language Models',
+                            shortDesc: 'Build and fine-tune generative AI applications.',
+                            subGoals: [
+                                {
+                                    title: 'Understanding LLMs (GPT, Claude, Gemini)',
+                                    resources: [
+                                        { name: 'OpenAI GPT Documentation', url: 'https://platform.openai.com/docs/' },
+                                        { name: 'Anthropic Claude Docs', url: 'https://docs.anthropic.com/' },
+                                        { name: 'Google Gemini API', url: 'https://ai.google.dev/docs' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Prompt Engineering & Optimization',
+                                    resources: [
+                                        { name: 'Prompt Engineering Guide', url: 'https://www.promptingguide.ai/' },
+                                        { name: 'OpenAI Prompt Engineering', url: 'https://platform.openai.com/docs/guides/prompt-engineering' },
+                                        { name: 'Learn Prompting Course', url: 'https://learnprompting.org/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Fine-tuning & Transfer Learning',
+                                    resources: [
+                                        { name: 'Hugging Face Fine-tuning', url: 'https://huggingface.co/docs/transformers/training' },
+                                        { name: 'OpenAI Fine-tuning Guide', url: 'https://platform.openai.com/docs/guides/fine-tuning' },
+                                        { name: 'PEFT (Parameter Efficient Fine-Tuning)', url: 'https://huggingface.co/docs/peft/index' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'RAG (Retrieval-Augmented Generation)',
+                                    resources: [
+                                        { name: 'LangChain Documentation', url: 'https://python.langchain.com/docs/get_started/introduction' },
+                                        { name: 'RAG Tutorial - Hugging Face', url: 'https://huggingface.co/blog/ray-rag' },
+                                        { name: 'Building RAG Applications', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'LLM Agents & Function Calling',
+                                    resources: [
+                                        { name: 'LangChain Agents', url: 'https://python.langchain.com/docs/modules/agents/' },
+                                        { name: 'OpenAI Function Calling', url: 'https://platform.openai.com/docs/guides/function-calling' },
+                                        { name: 'AutoGPT & AgentGPT', url: 'https://github.com/Significant-Gravitas/AutoGPT' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'MLOps & Model Deployment',
+                            shortDesc: 'Deploy, monitor, and maintain AI models in production.',
+                            subGoals: [
+                                {
+                                    title: 'Model Serialization (Pickle, ONNX, SavedModel)',
+                                    resources: [
+                                        { name: 'Model Serialization Guide', url: 'https://scikit-learn.org/stable/model_persistence.html' },
+                                        { name: 'ONNX Documentation', url: 'https://onnx.ai/' },
+                                        { name: 'TensorFlow SavedModel', url: 'https://www.tensorflow.org/guide/saved_model' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Building APIs with Flask/FastAPI',
+                                    resources: [
+                                        { name: 'Flask Official Tutorial', url: 'https://flask.palletsprojects.com/en/stable/tutorial/' },
+                                        { name: 'FastAPI Documentation', url: 'https://fastapi.tiangolo.com/' },
+                                        { name: 'Deploying ML Models with FastAPI', url: 'https://www.youtube.com/watch?v=1zMQBe0l1bM' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Containerization with Docker',
+                                    resources: [
+                                        { name: 'Docker for ML Engineers', url: 'https://docs.docker.com/get-started/' },
+                                        { name: 'Dockerizing ML Applications', url: 'https://towardsdatascience.com/how-to-dockerize-any-machine-learning-application-f78db654c601' },
+                                        { name: 'Docker Compose Tutorial', url: 'https://docs.docker.com/compose/gettingstarted/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Cloud Deployment (AWS, GCP, Azure)',
+                                    resources: [
+                                        { name: 'AWS SageMaker', url: 'https://aws.amazon.com/sagemaker/' },
+                                        { name: 'Google Vertex AI', url: 'https://cloud.google.com/vertex-ai/docs' },
+                                        { name: 'Azure Machine Learning', url: 'https://learn.microsoft.com/en-us/azure/machine-learning/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'ML Pipeline Orchestration (MLflow, Kubeflow)',
+                                    resources: [
+                                        { name: 'MLflow Documentation', url: 'https://mlflow.org/docs/latest/index.html' },
+                                        { name: 'Kubeflow Tutorial', url: 'https://www.kubeflow.org/docs/' },
+                                        { name: 'Weights & Biases', url: 'https://wandb.ai/site' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'AI Ethics & Responsible AI',
+                            shortDesc: 'Build fair, transparent, and ethical AI systems.',
+                            subGoals: [
+                                {
+                                    title: 'Bias Detection & Mitigation',
+                                    resources: [
+                                        { name: 'AI Fairness 360 (IBM)', url: 'https://aif360.mybluemix.net/' },
+                                        { name: 'Google Responsible AI', url: 'https://ai.google/responsibility/responsible-ai-practices/' },
+                                        { name: 'Fairness in ML - Google', url: 'https://developers.google.com/machine-learning/crash-course/fairness/video-lecture' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Model Explainability (SHAP, LIME)',
+                                    resources: [
+                                        { name: 'SHAP Documentation', url: 'https://shap.readthedocs.io/en/latest/' },
+                                        { name: 'LIME Tutorial', url: 'https://github.com/marcotcr/lime' },
+                                        { name: 'Interpretable ML Book', url: 'https://christophm.github.io/interpretable-ml-book/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Privacy & Security in AI',
+                                    resources: [
+                                        { name: 'Differential Privacy Guide', url: 'https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/dwork.pdf' },
+                                        { name: 'OWASP ML Security', url: 'https://owasp.org/www-project-machine-learning-security-top-10/' },
+                                        { name: 'Privacy-Preserving ML', url: 'https://www.tensorflow.org/responsible_ai/privacy/guide' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Real-World AI Projects',
+                            shortDesc: 'Build portfolio projects to showcase your skills.',
+                            subGoals: [
+                                {
+                                    title: 'End-to-End ML Project (Data to Deployment)',
+                                    resources: [
+                                        { name: 'Kaggle Competitions', url: 'https://www.kaggle.com/competitions' },
+                                        { name: 'ML Project Checklist', url: 'https://www.jeremyjordan.me/ml-projects-guide/' },
+                                        { name: 'Full Stack Deep Learning', url: 'https://fullstackdeeplearning.com/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Build a Chatbot with LLMs',
+                                    resources: [
+                                        { name: 'LangChain Chatbot Tutorial', url: 'https://python.langchain.com/docs/use_cases/chatbots/' },
+                                        { name: 'Streamlit for AI Apps', url: 'https://streamlit.io/' },
+                                        { name: 'Rasa Chatbot Framework', url: 'https://rasa.com/docs/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Computer Vision Application (Object Detection/Segmentation)',
+                                    resources: [
+                                        { name: 'YOLO Object Detection Project', url: 'https://github.com/ultralytics/yolov5' },
+                                        { name: 'Real-time Face Recognition', url: 'https://github.com/ageitgey/face_recognition' },
+                                        { name: 'OpenCV Projects', url: 'https://opencv.org/university/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Deploy AI Model as Web App',
+                                    resources: [
+                                        { name: 'Gradio for ML Apps', url: 'https://www.gradio.app/' },
+                                        { name: 'Hugging Face Spaces', url: 'https://huggingface.co/spaces' },
+                                        { name: 'Streamlit Deployment', url: 'https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'data-analyst',
+                    title: 'Data Analyst',
+                    icon: '📊',
+                    color: 'from-purple-400 to-purple-600',
+                    description: 'Transform data into valuable business insights by collecting, cleaning, analyzing, and visualizing data with modern tools.',
+                    skills: ['Excel', 'SQL', 'Python', 'Data Visualization', 'Statistics', 'Tableau', 'Power BI', 'Communication'],
+                    avgSalary: '$68,000 - $110,000',
+                    experienceLevel: 'Beginner to Intermediate',
+                    duration: '6-12 months',
+                    modules: 8,
+                    learningPath: [
+                        {
+                            title: 'Mathematics & Statistics',
+                            shortDesc: 'Build a strong foundation in statistics, probability, and basic algebra for data interpretation.',
+                            subGoals: [
+                                {
+                                    title: 'Essential Concepts: Algebra & Probability',
+                                    resources: [
+                                        { name: 'Khan Academy Statistics & Probability', url: 'https://www.khanacademy.org/math/statistics-probability' },
+                                        { name: 'StatQuest (YouTube)', url: 'https://www.youtube.com/c/joshstarmer' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Statistical Analysis & Distributions',
+                                    resources: [
+                                        { name: 'Think Stats (Free Book)', url: 'https://greenteapress.com/thinkstats2/html/index.html' },
+                                        { name: 'Harvard CS50 Statistics', url: 'https://cs50.harvard.edu/ai/2020/notes/0/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Spreadsheet Mastery (Excel & Google Sheets)',
+                            shortDesc: 'Learn to analyze and visualize data efficiently using spreadsheet tools.',
+                            subGoals: [
+                                {
+                                    title: 'Excel/Sheets Basics: Calculation, Formatting',
+                                    resources: [
+                                        { name: 'Excel Easy Tutorials', url: 'https://www.excel-easy.com/' },
+                                        { name: 'Google Sheets for Beginners', url: 'https://edu.gcfglobal.org/en/googlesheets/getting-started-with-google-sheets/1/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Pivot Tables & Data Analysis in Excel',
+                                    resources: [
+                                        { name: 'Excel Pivot Table Guide (Microsoft)', url: 'https://support.microsoft.com/en-us/office/pivot-table-overview-0b9600c2-8584-4c17-abd4-6b3a0c9b41a6' },
+                                        { name: 'Excel for Data Analysis (YouTube)', url: 'https://www.youtube.com/watch?v=VjV6qYtRmEA' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'SQL for Data Analysis',
+                            shortDesc: 'Query, join, and aggregate data using SQL in relational databases.',
+                            subGoals: [
+                                {
+                                    title: 'SQL Basics: SELECT, WHERE, JOIN',
+                                    resources: [
+                                        { name: 'SQLZoo Tutorials', url: 'https://sqlzoo.net/' },
+                                        { name: 'Mode Analytics SQL Tutorial', url: 'https://mode.com/sql-tutorial/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Intermediate SQL: Aggregations, Subqueries',
+                                    resources: [
+                                        { name: 'LeetCode SQL Practice', url: 'https://leetcode.com/problemset/database/' },
+                                        { name: 'W3Schools SQL Reference', url: 'https://www.w3schools.com/sql/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Database Design & ER Diagrams',
+                                    resources: [
+                                        { name: 'Database Design Basics (Microsoft)', url: 'https://learn.microsoft.com/en-us/sql/relational-databases/databases/database-design-basics' },
+                                        { name: 'Lucidchart ERD Guide', url: 'https://www.lucidchart.com/pages/er-diagrams' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Python for Data Analysis',
+                            shortDesc: 'Automate analyses and manipulate large datasets with Python.',
+                            subGoals: [
+                                {
+                                    title: 'Python Essentials for Data Analysts',
+                                    resources: [
+                                        { name: 'Python for Everybody (Free Course)', url: 'https://www.py4e.com/' },
+                                        { name: 'Codecademy Python', url: 'https://www.codecademy.com/learn/learn-python-3' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Data Manipulation with Pandas',
+                                    resources: [
+                                        { name: 'Pandas Documentation', url: 'https://pandas.pydata.org/docs/getting_started/index.html' },
+                                        { name: 'Kaggle Pandas Course', url: 'https://www.kaggle.com/learn/pandas' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Data Cleaning & Preprocessing',
+                                    resources: [
+                                        { name: 'Real Python Data Cleaning', url: 'https://realpython.com/python-data-cleaning-numpy-pandas/' },
+                                        { name: 'Towards Data Science Cleaning Guide', url: 'https://towardsdatascience.com/the-art-of-data-cleaning-23b3b3ba147f' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Data Visualization',
+                            shortDesc: 'Communicate insights with effective charts and interactive dashboards.',
+                            subGoals: [
+                                {
+                                    title: 'Charting with Matplotlib & Seaborn',
+                                    resources: [
+                                        { name: 'Matplotlib Tutorials', url: 'https://matplotlib.org/stable/tutorials/index.html' },
+                                        { name: 'Seaborn Guide', url: 'https://seaborn.pydata.org/tutorial.html' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Business Dashboards (Tableau, Power BI)',
+                                    resources: [
+                                        { name: 'Tableau Free Training', url: 'https://www.tableau.com/learn/training' },
+                                        { name: 'Power BI Learning Paths', url: 'https://learn.microsoft.com/en-us/training/paths/get-started-power-bi/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Visual Data Storytelling',
+                                    resources: [
+                                        { name: 'Makeover Monday (Practice Challenges)', url: 'http://www.makeovermonday.co.uk/' },
+                                        { name: 'FlowingData Visualization Guides', url: 'https://flowingdata.com/visualization/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Version Control (Git)',
+                            shortDesc: 'Manage code and collaborate with others seamlessly.',
+                            subGoals: [
+                                {
+                                    title: 'Git Essentials (Commit, Branch, Merge)',
+                                    resources: [
+                                        { name: 'Git Handbook (GitHub)', url: 'https://guides.github.com/introduction/git-handbook/' },
+                                        { name: 'Atlassian Git Tutorials', url: 'https://www.atlassian.com/git/tutorials' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Using GitHub for Projects',
+                                    resources: [
+                                        { name: 'GitHub Getting Started', url: 'https://docs.github.com/en/get-started' },
+                                        { name: 'Coursera Version Control with Git', url: 'https://www.coursera.org/learn/version-control-with-git' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Business Intelligence & Communication',
+                            shortDesc: 'Present insights and collaborate with business teams.',
+                            subGoals: [
+                                {
+                                    title: 'Communicating Insights',
+                                    resources: [
+                                        { name: 'Storytelling With Data (Book)', url: 'https://www.storytellingwithdata.com/' },
+                                        { name: 'Medium Data Storytelling Guide', url: 'https://towardsdatascience.com/data-storytelling-7fd62489df84' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Presentation Skills with Google Slides / PowerPoint',
+                                    resources: [
+                                        { name: 'LinkedIn Learning Data Presentation', url: 'https://www.linkedin.com/learning/presenting-data-effectively' },
+                                        { name: 'Google Slides Training', url: 'https://support.google.com/a/users/answer/9282669?hl=en' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Real-World Projects & Portfolio',
+                            shortDesc: 'Apply your skills with real datasets and build a showcase portfolio.',
+                            subGoals: [
+                                {
+                                    title: 'Analyze Public Datasets (Kaggle, UCI, Google Data)',
+                                    resources: [
+                                        { name: 'Kaggle Datasets', url: 'https://www.kaggle.com/datasets' },
+                                        { name: 'UCI Machine Learning Repository', url: 'https://archive.ics.uci.edu/ml/index.php' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Build Interactive Dashboards',
+                                    resources: [
+                                        { name: 'Tableau Dashboard Projects', url: 'https://public.tableau.com/en-us/s/resources' },
+                                        { name: 'Power BI Dashboard Examples', url: 'https://community.powerbi.com/t5/Data-Stories-Gallery/bg-p/DataStoriesGallery' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Prepare Portfolio & Resume',
+                                    resources: [
+                                        { name: 'GitHub Portfolio Guide', url: 'https://towardsdatascience.com/how-to-create-a-github-data-science-portfolio-d7b7e9d5a16b' },
+                                        { name: 'Resume Tips for Data Analysts', url: 'https://www.coursera.org/articles/data-analyst-resume-examples' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            certificationPaths: [
+                {
+                    id: 'aws-solutions-architect',
+                    title: 'AWS Solutions Architect (SAA-C03)',
+                    icon: '🏗️',
+                    color: 'from-orange-500 to-orange-600',
+                    provider: 'Amazon Web Services',
+                    level: 'Associate',
+                    description: 'Architect secure, scalable, and reliable applications on AWS by mastering best practices and core AWS services.',
+                    topics: [ 'VPC', 'EC2', 'S3', 'IAM', 'RDS', 'SQS', 'Lambda', 'CloudWatch', 'Security', 'Cost Optimization'],
+                    estimatedTime: '2-4 months',
+                    examCost: '$150',
+                    passingScore: '720/1000',
+                    learningPath: [
+                        {
+                            title: 'Design Secure Architectures',
+                            shortDesc: 'Implement security and compliance controls and protect sensitive data.',
+                            subGoals: [
+                                {
+                                    title: 'Identity & Access Management (IAM)',
+                                    resources: [
+                                        { name: 'AWS IAM Documentation', url: 'https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html' },
+                                        { name: 'Tutorials Dojo IAM Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' },
+                                        { name: 'Tutorials Dojo IAM Cheat Sheets', url: 'https://tutorialsdojo.com/aws-iam/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Networking & Security Groups',
+                                    resources: [
+                                        { name: 'AWS VPC Documentation', url: 'https://docs.aws.amazon.com/vpc/latest/userguide/' },
+                                        { name: 'Tutorials Dojo VPC & Security Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' },
+                                        { name: 'AWS Security Best Practices', url: 'https://aws.amazon.com/architecture/security-identity-compliance/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Encryption & KMS',
+                                    resources: [
+                                        { name: 'AWS KMS Docs', url: 'https://docs.aws.amazon.com/kms/latest/developerguide/' },
+                                        { name: 'Tutorials Dojo Encryption Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Design Resilient Architectures',
+                            shortDesc: 'Build highly available and fault-tolerant systems.',
+                            subGoals: [
+                                {
+                                    title: 'Multi-AZ & Disaster Recovery',
+                                    resources: [
+                                        { name: 'AWS Multi-AZ Solution Guide', url: 'https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html' },
+                                        { name: 'Disaster Recovery Whitepaper', url: 'https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.pdf' },
+                                        { name: 'Tutorials Dojo High Availability Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Auto Scaling & Elastic Load Balancing',
+                                    resources: [
+                                        { name: 'AWS Auto Scaling Docs', url: 'https://docs.aws.amazon.com/autoscaling/' },
+                                        { name: 'Elastic Load Balancing Overview', url: 'https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/' },
+                                        { name: 'Tutorials Dojo Scaling Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Health Checks & Monitoring',
+                                    resources: [
+                                        { name: 'AWS CloudWatch Documentation', url: 'https://docs.aws.amazon.com/cloudwatch/' },
+                                        { name: 'Tutorials Dojo Monitoring Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Design High-Performing Architectures',
+                            shortDesc: 'Architect systems for scalability and optimal performance.',
+                            subGoals: [
+                                {
+                                    title: 'Compute: EC2, Lambda, Elastic Beanstalk',
+                                    resources: [
+                                        { name: 'AWS EC2 Docs', url: 'https://docs.aws.amazon.com/ec2/' },
+                                        { name: 'AWS Lambda Docs', url: 'https://docs.aws.amazon.com/lambda/' },
+                                        { name: 'Tutorials Dojo Compute Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Database Services: RDS, DynamoDB',
+                                    resources: [
+                                        { name: 'Amazon RDS Documentation', url: 'https://docs.aws.amazon.com/rds/' },
+                                        { name: 'AWS DynamoDB Docs', url: 'https://docs.aws.amazon.com/amazondynamodb/' },
+                                        { name: 'Tutorials Dojo Database Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Storage Optimization: S3, EBS',
+                                    resources: [
+                                        { name: 'Amazon S3 Documentation', url: 'https://docs.aws.amazon.com/s3/' },
+                                        { name: 'Amazon EBS Docs', url: 'https://docs.aws.amazon.com/ebs/' },
+                                        { name: 'Tutorials Dojo S3/EBS Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Caching & Edge Services',
+                                    resources: [
+                                        { name: 'Amazon CloudFront Docs', url: 'https://docs.aws.amazon.com/AmazonCloudFront/' },
+                                        { name: 'Amazon ElastiCache Docs', url: 'https://docs.aws.amazon.com/AmazonElastiCache/' },
+                                        { name: 'Tutorials Dojo Caching Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Design Cost-Optimized Architectures',
+                            shortDesc: 'Architect solutions for efficiency and cost optimization.',
+                            subGoals: [
+                                {
+                                    title: 'Cost Management: Budgets & Cost Explorer',
+                                    resources: [
+                                        { name: 'AWS Cost Management Docs', url: 'https://docs.aws.amazon.com/cost-management/' },
+                                        { name: 'Tutorials Dojo Cost Optimization Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Right-Sizing & Savings Plans',
+                                    resources: [
+                                        { name: 'AWS Well-Architected Framework – Cost Optimization', url: 'https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html' },
+                                        { name: 'AWS Savings Plans', url: 'https://docs.aws.amazon.com/savingsplans/' },
+                                        { name: 'Tutorials Dojo Right-Sizing Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Storage Classes & Lifecycle Policies',
+                                    resources: [
+                                        { name: 'Amazon S3 Storage Classes', url: 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html' },
+                                        { name: 'S3 Lifecycle Configuration', url: 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html' },
+                                        { name: 'Tutorials Dojo Storage Lifecycle Labs', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Exam Readiness & Practice',
+                            shortDesc: 'Test your skills and readiness with high-quality exam preparation resources.',
+                            subGoals: [
+                                {
+                                    title: 'AWS Official Practice Questions',
+                                    resources: [
+                                        { name: 'AWS Official Exam Readiness', url: 'https://aws.amazon.com/certification/resources/' },
+                                        { name: 'AWS Sample Questions', url: 'https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Tutorials Dojo Practice Exams',
+                                    resources: [
+                                        { name: 'Tutorials Dojo Practice Exams', url: 'https://portal.tutorialsdojo.com/courses/aws-certified-solutions-architect-associate-practice-exams/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Tutorials Dojo PlayCloud Sandbox & Guided Labs',
+                                    resources: [
+                                        { name: 'PlayCloud Sandbox AWS', url: 'https://portal.tutorialsdojo.com/product/playcloud-sandbox-aws/' }
+                                    ],
+                                    isCompleted: false
+                                },
+                                {
+                                    title: 'Tutorials Dojo Cheat Sheets & Study Guides',
+                                    resources: [
+                                        { name: 'Tutorials Dojo Study Guides', url: 'https://portal.tutorialsdojo.com/' }
+                                    ],
+                                    isCompleted: false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+
+        const state = {
+            activeTab: 'career',
+            searchQuery: '',
+            currentPage: 'home',
+            selectedRoadmap: null,
+            selectedModuleIndex: 0
+        };
+
+        function findRoadmap(roadmapId) {
+            return ROADMAP_DATA.careerPaths.find(r => r.id === roadmapId) || ROADMAP_DATA.certificationPaths.find(r => r.id === roadmapId);
+        }
+
+        function setActiveTab(tab) {
+            state.activeTab = tab;
+            render();
+        }
+
+        function openRoadmap(roadmapId) {
+            state.currentPage = roadmapId;
+            state.selectedRoadmap = findRoadmap(roadmapId);
+            state.selectedModuleIndex = 0;
+            render();
+        }
+
+        function goHome() {
+            state.currentPage = 'home';
+            state.selectedRoadmap = null;
+            render();
+        }
+
+        function selectModule(index) {
+            if (index < 0 || index >= state.selectedRoadmap.learningPath.length) return;
+
+            updateProgress();
+            
+            state.selectedModuleIndex = index;
+
+            const detailPanel = document.getElementById('detail-panel-content');
+            if (detailPanel) detailPanel.innerHTML = renderDetailPanel(state.selectedRoadmap);
+
+            updateProgress();
+        }
+
+        function markModuleAsComplete() {
+            const roadmap = state.selectedRoadmap;
+            if (!roadmap) return;
+            
+            const module = roadmap.learningPath[state.selectedModuleIndex];
+            if (!module || !module.subGoals) return;
+
+            const isCurrentlyComplete = module.subGoals.every(sg => sg.isCompleted);
+            const newState = !isCurrentlyComplete;
+            
+
+            module.subGoals.forEach(subGoal => {
+                subGoal.isCompleted = newState;
+            });
+            
+
+            const checkboxes = document.querySelectorAll('#detail-panel-content input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = newState;
+            });
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const roadmap = state.selectedRoadmap;
+            if (!roadmap || !roadmap.learningPath || roadmap.learningPath.length === 0) return;
+
+            let completed = 0;
+            let total = 0;
+
+            roadmap.learningPath.forEach(module => {
+                module.subGoals.forEach(subGoal => {
+                    const moduleSlug = createSlug(module.title);
+                    const subGoalSlug = createSlug(subGoal.title);
+                    const checkboxId = `sg-${moduleSlug}-${subGoalSlug}`;
+                    const checkbox = document.getElementById(checkboxId);
+
+                    if (checkbox) {
+                        subGoal.isCompleted = checkbox.checked;
+                    }
+                });
+            });
+
+            roadmap.learningPath.forEach(module => {
+                if (module.subGoals) {
+                    module.subGoals.forEach(subGoal => {
+                        total++;
+                        if (subGoal.isCompleted) {
+                            completed++;
+                        }
+                    });
+                }
+            });
+
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            const progressBar = document.getElementById('progress-bar');
+
+            if (progressBar) {
+                progressBar.style.width = percent + '%';
+                progressBar.setAttribute('aria-valuenow', percent);
+            }
+
+            const leftPanel = document.getElementById('roadmap-left-panel-content');
+            if (leftPanel) {
+                leftPanel.innerHTML = renderRoadmapLeftPanelContent(roadmap);
+                const newProgressText = document.getElementById('progress-text');
+                if (newProgressText) {
+                    newProgressText.innerText = `${percent}% complete (${completed}/${total} steps)`;
+                }
+
+                const newProgressBar = document.getElementById('progress-bar');
+                if (newProgressBar) {
+                    newProgressBar.style.width = percent + '%';
+                }
+            }
+        }
+        
+        window.updateProgress = updateProgress;
+        window.openRoadmap = openRoadmap;
+        window.setActiveTab = setActiveTab;
+        window.setSearchQuery = (query) => { state.searchQuery = query; render(); };
+        window.goHome = goHome;
+        window.selectModule = selectModule;
+        
+        function renderRoadmapLeftPanelContent(roadmap) {
+            const learningPath = roadmap.learningPath || [];
+            
+            let globalCompleted = 0;
+            let globalTotal = 0;
+            roadmap.learningPath.forEach(module => {
+                if (module.subGoals) {
+                    module.subGoals.forEach(subGoal => {
+                        globalTotal++;
+                        if (subGoal.isCompleted) {
+                            globalCompleted++;
+                        }
+                    });
+                }
+            });
+            const globalPercent = globalTotal > 0 ? Math.round((globalCompleted / globalTotal) * 100) : 0;
+            
+            const listItems = learningPath.map((module, mIdx) => {
+                const isActive = state.selectedModuleIndex === mIdx;
+                
+                let isModuleCompleted = false;
+                if (module.subGoals && module.subGoals.length > 0) {
+                    isModuleCompleted = module.subGoals.every(sg => sg.isCompleted);
+                }
+                
+                const dotClass = isModuleCompleted ? 'completed' : (isActive ? 'active' : 'bg-gray-400');
+
+                return `
+                    <div class="roadmap-step">
+                        <div class="roadmap-dot ${dotClass}"></div>
+                        <button
+                            onclick="selectModule(${mIdx})"
+                            class="w-full text-left p-3 rounded-lg transition-colors duration-200 ${
+                                isActive ? 'bg-blue-50 shadow-inner border border-blue-200' : 'hover:bg-gray-100'
+                            }"
+                        >
+                            <span class="text-xs font-semibold text-gray-500">Step ${mIdx + 1} of ${learningPath.length}</span>
+                            <h4 class="text-base font-bold text-gray-900 mb-1">${module.title}</h4>
+                            <p class="text-sm text-gray-600">${module.shortDesc || 'Click to view details.'}</p>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="pt-10">
+                    <button onclick="goHome()" class="text-blue-400 hover:underline flex items-center gap-1 mb-8 font-medium">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Roadmaps
+                    </button>
+
+                    <h2 class="text-xl font-bold mb-4 text-gray-900">Learning Path</h2>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                            <span>Progress</span>
+                            <span id="progress-text" class="text-blue-400 font-semibold">
+                                ${globalPercent}% complete (${globalCompleted}/${globalTotal} steps)
+                            </span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                                id="progress-bar"
+                                class="bg-gradient-to-r from-[#6D94C5] to-[#636CCB] h-full rounded-full w-0 transition-all duration-700"
+                                role="progressbar"
+                                aria-valuenow="0"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        ${listItems}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDetailPanel(roadmap) {
+            const module = roadmap.learningPath[state.selectedModuleIndex];
+            
+            if (!module || !module.subGoals || module.subGoals.length === 0) {
+                return `<div class="p-8 text-center text-gray-500">No detailed milestones available for this module yet.</div>`;
+            }
+
+            const totalSubgoals = module.subGoals.length;
+            const completedSubgoals = module.subGoals.filter(sg => sg.isCompleted).length;
+            
+            const subGoalList = module.subGoals.map((subGoal) => {
+                const moduleSlug = createSlug(module.title);
+                const subGoalSlug = createSlug(subGoal.title);
+                const checkboxId = `sg-${moduleSlug}-${subGoalSlug}`;
+                
+                const isChecked = subGoal.isCompleted;
+
+                return `
+                    <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <input
+                            type="checkbox"
+                            id="${checkboxId}"
+                            class="subgoal-checkbox w-5 h-5 mt-1 flex-shrink-0 text-green-600 bg-white border-gray-300 rounded focus:ring-green-500 cursor-pointer"
+                            onchange="updateProgress();"
+                            ${isChecked ? 'checked' : ''}
+                        >
+                        <div class="flex-1">
+                            <label for="${checkboxId}" class="font-semibold text-gray-800 cursor-pointer ${isChecked ? 'text-gray-500' : ''}">
+                                ${subGoal.title}
+                            </label>
+                            ${subGoal.resources && subGoal.resources.length > 0 ? `
+                                    <div class="mt-4 text-xs text-gray-500 flex flex-col gap-2">
+                                        <span class="font-semibold text-gray-500">Resources:</span>
+                                        <div class="flex flex-wrap gap-2">
+                                        ${subGoal.resources.map(r =>
+                                            `<a href="${r.url}" target="_blank" class="px-3 py-1 bg-white rounded-xl border border-blue-200 font-semibold text-[#33A1E0] hover:text-blue-700 hover:bg-blue-200 transition-colors whitespace-nowrap">
+                                                🔗 ${r.name}
+                                            </a>`
+                                        ).join('')}
+                                        </div>
+                                    </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const isModuleFullyComplete = completedSubgoals === totalSubgoals && totalSubgoals > 0;
+            const buttonText = isModuleFullyComplete ? 'Completed' : 'Mark Complete';
+            const buttonClass = isModuleFullyComplete
+                ? 'bg-gray-400 text-white hover:bg-gray-500'
+                : 'bg-blue-400 text-white hover:bg-blue-500';
+            const buttonIcon = isModuleFullyComplete
+                ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+                : '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+
+            return `
+                <div class="detail-card bg-gray-50 rounded-xl shadow-2xl border border-gray-200">
+                    <div class="p-6 border-b border-gray-100 bg-white rounded-t-xl">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-bold text-[#1B3C53] mb-1">${module.title}</h2>
+                            <button
+                                onclick="markModuleAsComplete()"
+                                class="flex items-center gap-1 px-3 py-1 text-sm font-semibold rounded-full transition-colors ${buttonClass}"
+                            >
+                                ${buttonIcon}
+                                ${buttonText}
+                            </button>
+                        </div>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">${completedSubgoals}/${totalSubgoals} milestones completed</span>
+                    </div>
+
+                    <div class="p-6 space-y-4">
+
+                        <h3 class="text-md font-bold text-gray-500 border-b pb-2">Learning Milestones</h3>
+
+                        <div class="space-y-3">
+
+                            ${subGoalList}
+
+                        </div>
+                    </div>
+                    <div class="flex justify-between p-6 text-sm border-t border-gray-100">
+                        <button class="text-gray-500 hover:text-orange-800 font-semibold disabled:opacity-70 flex items-center gap-1 cursor-pointer" ${state.selectedModuleIndex === 0 ? 'disabled' : ''} onclick="selectModule(${state.selectedModuleIndex - 1})">
+
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+
+                            Previous
+
+                        </button>
+
+                        <span class="text-gray-500">${state.selectedModuleIndex + 1} of ${roadmap.learningPath.length}</span>
+
+                        <button class="text-orange-700 hover:text-orange-900 font-semibold disabled:opacity-70 flex items-center gap-1 cursor-pointer" ${state.selectedModuleIndex === roadmap.learningPath.length - 1 ? 'disabled' : ''} onclick="selectModule(${state.selectedModuleIndex + 1})">
+                            Next
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+
+                        </button>
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+        function renderRoadmapPage() {
+            const roadmap = state.selectedRoadmap;
+            if (!roadmap) return `<p class="text-center py-10">Roadmap not found.</p>`;
+            
+            if (state.selectedModuleIndex >= roadmap.learningPath.length) {
+                state.selectedModuleIndex = 0;
+            }
+
+            const isCareer = !roadmap.provider;
+            
+            const overviewBlock = isCareer ? `
+                <div class="text-xs flex items-center gap-2 mt-2">
+                    <span class="font-semibold text-gray-600 bg-gray-200 rounded-full py-1 px-2 border border-gray-100">${roadmap.avgSalary}</span>
+                    <span class="font-semibold text-gray-600 bg-gray-200 rounded-full py-1 px-2 border border-gray-100">${roadmap.duration}</span>
+                    <span class="font-semibold text-gray-600 bg-gray-200 rounded-full py-1 px-2 border border-gray-100">${roadmap.experienceLevel}</span>
+                </div>
+            ` : `
+                <div class="text-xs text-gray-700 flex items-center gap-2 mt-2">
+                    <span class="font-semibold text-gray-600 bg-gray-200 rounded-full py-1 px-2 border border-gray-100">${roadmap.examCost}</span>
+                    <span class="font-semibold text-gray-600 bg-gray-200 rounded-full py-1 px-2 border border-gray-100">${roadmap.estimatedTime}</span>
+                    <span class="font-semibold text-gray-600 bg-gray-200 rounded-full py-1 px-2 border border-gray-100">${roadmap.provider}</span>
+                </div>
+            `;
+
+            return `
+                <div class="roadmap-container">
+                    
+                    <div class="roadmap-left-panel">
+                        <div id="roadmap-left-panel-content">
+                            ${renderRoadmapLeftPanelContent(roadmap)}
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-main-content ml-7">
+                        
+                        <div class="flex items-center gap-4 mb-2 pt-10">
+                            <div class="icon-badge bg-gradient-to-br ${roadmap.color} text-white">${roadmap.icon}</div>
+                            <div>
+                                <h1 class="text-4xl font-extrabold text-[#1B3C53]">${roadmap.title}</h1>
+                                ${overviewBlock}
+                            </div>
+                            
+                        </div>
+
+                        <div class="text-sm text-gray-600 mt-8 mb-8 max-w-4xl justify-center">
+                                    ${roadmap.description}
+                        </div>
+                        
+                        <div id="detail-panel-content" class="fade-in mb-10">
+                            ${renderDetailPanel(roadmap)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderHero() {
+            return`
+            <div class="hero-gradient text-white py-20">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="max-w-3xl">
+                        <h1 class="text-5xl font-bold mb-4"> Your Path to Tech Success </h1>
+                        <p class="text-xl text-blue-100 mb-8"> Explore curated roadmaps for career advancement and professional certifications. Learn the skills that matter, earn recognized credentials, and advance your tech career. </p>
+                        <div class="flex gap-4">
+                            <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4">
+                                <div class="text-3xl font-bold">12+</div>
+                                <div class="text-blue-100 text-sm">
+                                    Career Paths
+                                </div>
+                            </div>
+                            <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4">
+                                <div class="text-3xl font-bold">50+</div>
+                                <div class="text-blue-100 text-sm">
+                                    Certifications
+                                </div>
+                            </div>
+                            <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4">
+                                <div class="text-3xl font-bold">1000+</div>
+                                <div class="text-blue-100 text-sm">
+                                    Resources
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        ; }
+
+        function renderTabs() {
+            return `
+            <div class="bg-white border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-4">
+                    <button
+                        onclick="setActiveTab('career')"
+                        class="tab-button px-6 py-3 rounded-lg font-semibold ${
+                            state.activeTab === 'career' ? 'active' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }"
+                    >
+                        🎯 Career Paths
+                    </button>
+                    <button
+                        onclick="setActiveTab('certification')"
+                        class="tab-button px-6 py-3 rounded-lg font-semibold ${
+                            state.activeTab === 'certification' ? 'active' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }"
+                    >
+                        🏆 Certifications
+                    </button>
+                    <input type="text" placeholder="Search roadmaps..." oninput="setSearchQuery(this.value)" class="flex-1 px-4 py-2 border rounded-lg"/>
+                </div>
+            </div>`;
+        }
+        
+        function renderCareerCard(career) {
+            return `
+                <div class="card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="p-8">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="icon-badge bg-gradient-to-br ${career.color} text-white flex-shrink-0">
+                                ${career.icon}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">${career.title}</h3>
+                                <p class="text-gray-600 text-sm">${career.description.substring(0, 50)}...</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="text-gray-500">💰</span>
+                                <span class="font-semibold text-green-700">${career.avgSalary}</span>
+                                <span class="text-gray-400">avg. salary</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="text-gray-500">⏱️</span>
+                                <span class="text-gray-700">${career.duration}</span>
+                                <span class="text-gray-400">•</span>
+                                <span class="text-gray-700">${career.modules} modules</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="text-gray-500">📈</span>
+                                <span class="text-gray-700">${career.experienceLevel}</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="text-xs font-semibold text-gray-500 mb-2">KEY SKILLS</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${career.skills.slice(0, 5).map(skill => `
+                                    <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-medium">
+                                        ${skill}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-4">
+                            <button
+                                onclick="openRoadmap('${career.id}')"
+                                class="text-orange-400 hover:text-orange-700 font-semibold"
+                            >
+                                View Roadmap →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderCertificationCard(cert) {
+            return `
+                <div class="card bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="p-6">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="icon-badge bg-gradient-to-br ${cert.color} text-white flex-shrink-0">
+                                ${cert.icon}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="text-xl font-bold text-gray-900">${cert.title}</h3>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
+                                        ${cert.level}
+                                    </span>
+                                </div>
+                                <p class="text-gray-500 text-xs font-medium mb-1">${cert.provider}</p>
+                                <p class="text-gray-600 text-xs">${cert.description.substring(0, 50)}...</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="text-xs text-gray-500 mb-1">Study Time</div>
+                                <div class="font-semibold text-gray-900">${cert.estimatedTime}</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="text-xs text-gray-500 mb-1">Exam Cost</div>
+                                <div class="font-semibold text-[gray-900]">${cert.examCost}</div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-4">
+                            <button
+                                onclick="openRoadmap('${cert.id}')"
+                                class="text-orange-400 hover:text-orange-700 font-semibold"
+                            >
+                                View Roadmap →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFooter() {
+            return `
+            <footer class="bg-gray-900 text-white py-12 mt-16">
+                <div class="max-w-7xl mx-auto px-6 text-center text-sm text-gray-400">
+                    <p>&copy; ${new Date().getFullYear()} Dearah Barsolasco. Powered by Tutorials Dojo.</p>
+                </div>
+            </footer>
+            `;
+        }
+
+        function filterItems(items) {
+            const query = state.searchQuery.toLowerCase();
+            return items.filter(item => item.title.toLowerCase().includes(query) || (item.description && item.description.toLowerCase().includes(query)));
+        }
+        
+        function renderContent() {
+            const items = state.activeTab === 'career'
+                ? filterItems(ROADMAP_DATA.careerPaths)
+                : filterItems(ROADMAP_DATA.certificationPaths);
+                
+            if (items.length === 0 && state.searchQuery) return `<div class="text-center py-16 text-gray-500">No roadmaps match your search.</div>`;
+
+            return `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+                    ${items.map(item =>
+                        state.activeTab === 'career'
+                            ? renderCareerCard(item)
+                            : renderCertificationCard(item)
+                    ).join('')}
+                </div>
+            `;
+        }
+
+
+        function render() {
+            const app = document.getElementById('app');
+            if (state.currentPage !== 'home') {
+                app.innerHTML = renderRoadmapPage();
+
+                const mainContent = document.getElementById('roadmap-main-scroll-target');
+                if (mainContent) {
+                    mainContent.scrollTop = 0;
+                }
+        
+                window.scrollTo(0, 0);
+                setTimeout(updateProgress, 10);
+                return;
+            }
+
+            app.innerHTML = `
+                ${renderHero()}
+                ${renderTabs()}
+                <div class="max-w-7xl mx-auto px-6 py-8">
+                    ${renderContent()}
+                </div>
+                ${renderFooter()}
+            `;
+        }
+
+        render();
+    </script>
+</body>
+</html>
