@@ -1,0 +1,587 @@
+[
+  {
+    "title": "Programming Fundamentals",
+    "shortDesc": "Understanding core programming concepts and syntax.",
+    "subGoals": [
+      {
+        "title": "Learn Python Basics (Syntax, Variables, Loops, Functions)",
+        "resources": [
+          {
+            "name": "Python Official Tutorial",
+            "url": "https://docs.python.org/3/tutorial/"
+          },
+          {
+            "name": "Tutorials Dojo Python for Beginners Labs",
+            "url": "https://portal.tutorialsdojo.com/courses/python-for-beginners-with-hands-on-labs/"
+          },
+          {
+            "name": "Tutorials Dojo Python Online IDE",
+            "url": "https://portal.tutorialsdojo.com/courses/playcode-ai-labs/lessons/python-playcode-ide/"
+          },
+          {
+            "name": "Tutorials Dojo Python Labs (Basic)",
+            "url": "https://portal.tutorialsdojo.com/courses/playcode-ai-labs/lessons/playcode-python-lab-basic/"
+          },
+          {
+            "name": "Codecademy Python Course",
+            "url": "https://www.codecademy.com/learn/learn-python-3"
+          },
+          {
+            "name": "W3Schools Python Tutorial",
+            "url": "https://www.w3schools.com/python/default.asp"
+          }
+        ]
+      },
+      {
+        "title": "Master JavaScript Fundamentals",
+        "resources": [
+          {
+            "name": "MDN JavaScript Guide",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+          },
+          {
+            "name": "Tutorials Dojo Javascript Labs",
+            "url": "https://portal.tutorialsdojo.com/courses/playcode-ai-labs/lessons/playcode-javascript/"
+          },
+          {
+            "name": "JavaScript.info",
+            "url": "https://javascript.info/"
+          },
+          {
+            "name": "FreeCodeCamp JavaScript",
+            "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"
+          }
+        ]
+      },
+      {
+        "title": "Learn Java/C++ (Choose one)",
+        "resources": [
+          {
+            "name": "Oracle Java Tutorials",
+            "url": "https://docs.oracle.com/javase/tutorial/"
+          },
+          {
+            "name": "Learn C++ - LearnCpp.com",
+            "url": "https://www.learncpp.com/"
+          },
+          {
+            "name": "W3Schools Java",
+            "url": "https://www.w3schools.com/java/default.asp"
+          }
+        ]
+      },
+      {
+        "title": "Understand Variables, Data Types & Control Flow",
+        "resources": [
+          {
+            "name": "CS50x Harvard Introduction",
+            "url": "https://cs50.harvard.edu/x/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Data Structures & Algorithms",
+    "shortDesc": "Master essential data structures and algorithmic problem-solving.",
+    "subGoals": [
+      {
+        "title": "Learn Big-O Notation & Time Complexity",
+        "resources": [
+          {
+            "name": "Big-O Cheat Sheet",
+            "url": "https://www.bigocheatsheet.com/"
+          },
+          {
+            "name": "Khan Academy Algorithms",
+            "url": "https://www.khanacademy.org/computing/computer-science/algorithms"
+          }
+        ]
+      },
+      {
+        "title": "Master Arrays, Linked Lists, Stacks & Queues",
+        "resources": [
+          {
+            "name": "GeeksforGeeks Data Structures",
+            "url": "https://www.geeksforgeeks.org/data-structures/"
+          },
+          {
+            "name": "VisualGo - Visualize DS",
+            "url": "https://visualgo.net/en"
+          },
+          {
+            "name": "FreeCodeCamp DS Course",
+            "url": "https://www.freecodecamp.org/news/learn-data-structures-and-algorithms/"
+          }
+        ]
+      },
+      {
+        "title": "Understand Trees, Graphs & Hash Tables",
+        "resources": [
+          {
+            "name": "GeeksforGeeks Trees",
+            "url": "https://www.geeksforgeeks.org/binary-tree-data-structure/"
+          },
+          {
+            "name": "Graph Theory Tutorial",
+            "url": "https://www.programiz.com/dsa/graph"
+          }
+        ]
+      },
+      {
+        "title": "Practice Sorting & Searching Algorithms",
+        "resources": [
+          {
+            "name": "Sorting Algorithms Visualized",
+            "url": "https://visualgo.net/en/sorting"
+          },
+          {
+            "name": "LeetCode Explore",
+            "url": "https://leetcode.com/explore/"
+          },
+          {
+            "name": "HackerRank Practice",
+            "url": "https://www.hackerrank.com/domains/algorithms"
+          }
+        ]
+      },
+      {
+        "title": "Learn Recursion & Dynamic Programming",
+        "resources": [
+          {
+            "name": "Dynamic Programming - GeeksforGeeks",
+            "url": "https://www.geeksforgeeks.org/dynamic-programming/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Object-Oriented Programming (OOP)",
+    "shortDesc": "Learn OOP principles and design patterns.",
+    "subGoals": [
+      {
+        "title": "Understand Classes, Objects & Inheritance",
+        "resources": [
+          {
+            "name": "Oracle Java OOP Concepts",
+            "url": "https://docs.oracle.com/javase/tutorial/java/concepts/"
+          },
+          {
+            "name": "Python OOP Tutorial",
+            "url": "https://realpython.com/python3-object-oriented-programming/"
+          }
+        ]
+      },
+      {
+        "title": "Master Polymorphism & Encapsulation",
+        "resources": [
+          {
+            "name": "OOP Principles - GeeksforGeeks",
+            "url": "https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/"
+          },
+          {
+            "name": "Programiz OOP",
+            "url": "https://www.programiz.com/python-programming/object-oriented-programming"
+          }
+        ]
+      },
+      {
+        "title": "Learn Design Patterns (Singleton, Factory, Observer)",
+        "resources": [
+          {
+            "name": "Refactoring Guru Design Patterns",
+            "url": "https://refactoring.guru/design-patterns"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Version Control & Collaboration",
+    "shortDesc": "Managing and collaborating on projects with Git.",
+    "subGoals": [
+      {
+        "title": "Learn Git Basics (commit, branch, merge)",
+        "resources": [
+          {
+            "name": "Git Official Documentation",
+            "url": "https://git-scm.com/doc"
+          },
+          {
+            "name": "Atlassian Git Tutorials",
+            "url": "https://www.atlassian.com/git/tutorials"
+          },
+          {
+            "name": "GitHub Git Handbook",
+            "url": "https://guides.github.com/introduction/git-handbook/"
+          }
+        ]
+      },
+      {
+        "title": "Master Pull Requests & Code Reviews",
+        "resources": [
+          {
+            "name": "GitHub Pull Request Guide",
+            "url": "https://docs.github.com/en/pull-requests"
+          },
+          {
+            "name": "Git Branching Strategies",
+            "url": "https://www.atlassian.com/git/tutorials/comparing-workflows"
+          }
+        ]
+      },
+      {
+        "title": "Handle Merge Conflicts & Rebasing",
+        "resources": [
+          {
+            "name": "Git Conflict Resolution",
+            "url": "https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts"
+          },
+          {
+            "name": "Learn Git Branching (Interactive)",
+            "url": "https://learngitbranching.js.org/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Databases & SQL",
+    "shortDesc": "Learn database design, queries, and management.",
+    "subGoals": [
+      {
+        "title": "Learn SQL Basics (SELECT, INSERT, UPDATE, DELETE)",
+        "resources": [
+          {
+            "name": "SQLZoo Interactive Tutorial",
+            "url": "https://sqlzoo.net/"
+          },
+          {
+            "name": "Tutorials Dojo SQL Labs",
+            "url": "https://portal.tutorialsdojo.com/courses/playcode-ai-labs/lessons/playcode-interactive-sql-lab/"
+          },
+          {
+            "name": "Mode Analytics SQL Tutorial",
+            "url": "https://mode.com/sql-tutorial/"
+          },
+          {
+            "name": "W3Schools SQL",
+            "url": "https://www.w3schools.com/sql/"
+          }
+        ]
+      },
+      {
+        "title": "Understand Relational Databases (PostgreSQL, MySQL)",
+        "resources": [
+          {
+            "name": "PostgreSQL Tutorial",
+            "url": "https://www.postgresqltutorial.com/"
+          },
+          {
+            "name": "MySQL Documentation",
+            "url": "https://dev.mysql.com/doc/"
+          }
+        ]
+      },
+      {
+        "title": "Learn NoSQL Databases (MongoDB, Redis)",
+        "resources": [
+          {
+            "name": "MongoDB University",
+            "url": "https://university.mongodb.com/"
+          },
+          {
+            "name": "Redis Documentation",
+            "url": "https://redis.io/docs/"
+          }
+        ]
+      },
+      {
+        "title": "Database Design & Normalization",
+        "resources": [
+          {
+            "name": "Database Normalization Explained",
+            "url": "https://www.guru99.com/database-normalization.html"
+          },
+          {
+            "name": "SQL Database Design",
+            "url": "https://www.geeksforgeeks.org/introduction-of-database-normalization/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Software Testing & Debugging",
+    "shortDesc": "Write tests and debug code effectively.",
+    "subGoals": [
+      {
+        "title": "Learn Unit Testing (JUnit, pytest)",
+        "resources": [
+          {
+            "name": "JUnit 5 User Guide",
+            "url": "https://junit.org/junit5/docs/current/user-guide/"
+          },
+          {
+            "name": "Pytest Documentation",
+            "url": "https://docs.pytest.org/"
+          }
+        ]
+      },
+      {
+        "title": "Master Test-Driven Development (TDD)",
+        "resources": [
+          {
+            "name": "TDD Introduction - Martin Fowler",
+            "url": "https://martinfowler.com/bliki/TestDrivenDevelopment.html"
+          },
+          {
+            "name": "TDD Tutorial",
+            "url": "https://www.guru99.com/test-driven-development.html"
+          }
+        ]
+      },
+      {
+        "title": "Learn Debugging with IDE Tools",
+        "resources": [
+          {
+            "name": "VS Code Debugging Guide",
+            "url": "https://code.visualstudio.com/docs/editor/debugging"
+          },
+          {
+            "name": "IntelliJ IDEA Debugger",
+            "url": "https://www.jetbrains.com/help/idea/debugging-code.html"
+          }
+        ]
+      },
+      {
+        "title": "Integration & End-to-End Testing",
+        "resources": [
+          {
+            "name": "Selenium Testing",
+            "url": "https://www.selenium.dev/documentation/"
+          },
+          {
+            "name": "Cypress E2E Testing",
+            "url": "https://www.cypress.io/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Software Architecture & System Design",
+    "shortDesc": "Design scalable and maintainable systems.",
+    "subGoals": [
+      {
+        "title": "Understand MVC, Microservices & Monoliths",
+        "resources": [
+          {
+            "name": "System Design Primer (GitHub)",
+            "url": "https://github.com/donnemartin/system-design-primer"
+          },
+          {
+            "name": "Microservices Architecture",
+            "url": "https://microservices.io/"
+          }
+        ]
+      },
+      {
+        "title": "Learn REST API Design Principles",
+        "resources": [
+          {
+            "name": "REST API Tutorial",
+            "url": "https://restfulapi.net/"
+          },
+          {
+            "name": "Microsoft API Design Guide",
+            "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design"
+          }
+        ]
+      },
+      {
+        "title": "Master Scalability, Load Balancing & Caching",
+        "resources": [
+          {
+            "name": "System Design Interview Prep",
+            "url": "https://www.educative.io/courses/grokking-the-system-design-interview"
+          },
+          {
+            "name": "Web Scalability for Startup Engineers (Book)",
+            "url": "https://www.amazon.com/Scalability-Startup-Engineers-Artur-Ejsmont/dp/0071843655"
+          }
+        ]
+      },
+      {
+        "title": "Study Design Patterns in System Architecture",
+        "resources": [
+          {
+            "name": "Microsoft Architecture Guide",
+            "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/"
+          },
+          {
+            "name": "Martin Fowler - Architecture",
+            "url": "https://martinfowler.com/architecture/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Cloud Computing & DevOps",
+    "shortDesc": "Deploy applications and automate infrastructure.",
+    "subGoals": [
+      {
+        "title": "Learn Docker Basics & Containerization",
+        "resources": [
+          {
+            "name": "Docker Getting Started",
+            "url": "https://docs.docker.com/get-started/"
+          },
+          {
+            "name": "Docker Curriculum",
+            "url": "https://docker-curriculum.com/"
+          },
+          {
+            "name": "Tutorials Dojo Docker Labs",
+            "url": "https://portal.tutorialsdojo.com/courses/playcode-ai-labs/lessons/playcode-docker-labs/"
+          }
+        ]
+      },
+      {
+        "title": "Understand CI/CD Pipelines (GitHub Actions, Jenkins)",
+        "resources": [
+          {
+            "name": "GitHub Actions Documentation",
+            "url": "https://docs.github.com/en/actions"
+          },
+          {
+            "name": "Jenkins Tutorial",
+            "url": "https://www.jenkins.io/doc/tutorials/"
+          }
+        ]
+      },
+      {
+        "title": "Learn Cloud Platforms (AWS, Azure, GCP)",
+        "resources": [
+          {
+            "name": "AWS Free Tier & Tutorials",
+            "url": "https://aws.amazon.com/free/"
+          },
+          {
+            "name": "Azure Fundamentals",
+            "url": "https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/"
+          },
+          {
+            "name": "Google Cloud Skills Boost",
+            "url": "https://www.cloudskillsboost.google/"
+          },
+          {
+            "name": "Tutorials Dojo Free AWS Digital Courses",
+            "url": "https://portal.tutorialsdojo.com/product-category/aws/aws-digital-courses-2/"
+          },
+          {
+            "name": "Tutorials Dojo Free Practice Exams (AWS, Microsoft Azure, GCP, Kubernetes)",
+            "url": "https://portal.tutorialsdojo.com/product-category/free-practice-exams/"
+          }
+        ]
+      },
+      {
+        "title": "Master Kubernetes Basics",
+        "resources": [
+          {
+            "name": "Kubernetes Official Docs",
+            "url": "https://kubernetes.io/docs/tutorials/"
+          },
+          {
+            "name": "KodeKloud Kubernetes Course",
+            "url": "https://kodekloud.com/courses/kubernetes-for-the-absolute-beginners/"
+          },
+          {
+            "name": "Tutorials Dojo Kubernetes Labs",
+            "url": "https://portal.tutorialsdojo.com/courses/playcode-ai-labs/lessons/playcode-kubernetes-lab/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "AI Tools & Modern Development",
+    "shortDesc": "Leverage AI to enhance productivity and efficiency.",
+    "subGoals": [
+      {
+        "title": "Use AI Assistants (ChatGPT, Claude, Gemini)",
+        "resources": [
+          {
+            "name": "ChatGPT for Developers",
+            "url": "https://platform.openai.com/docs/"
+          },
+          {
+            "name": "Prompt Engineering Guide",
+            "url": "https://www.promptingguide.ai/"
+          }
+        ]
+      },
+      {
+        "title": "Master AI Copilots (GitHub Copilot, Tabnine)",
+        "resources": [
+          {
+            "name": "GitHub Copilot Docs",
+            "url": "https://docs.github.com/en/copilot"
+          },
+          {
+            "name": "Tabnine AI",
+            "url": "https://www.tabnine.com/"
+          }
+        ]
+      },
+      {
+        "title": "Explore AI Code Editors (Cursor, Windsurf)",
+        "resources": [
+          {
+            "name": "Cursor AI Editor",
+            "url": "https://cursor.sh/"
+          },
+          {
+            "name": "AI Development Tools Guide",
+            "url": "https://github.com/e2b-dev/awesome-ai-agents"
+          }
+        ]
+      }
+    ]
+  },
+  {
+  "title": "Real-World Projects & Portfolio",
+  "shortDesc": "Apply your skills with real projects and build a showcase portfolio.",
+  "subGoals": [
+    {
+      "title": "Portfolio Project Ideas",
+      "resources": [
+        { "name": "Medium Portfolio Projects", "url": "https://dev.to/code_2/20-fullstack-project-ideas-that-will-land-you-a-job-in-2025-3h35" }
+      ],
+      "isCompleted": false
+    },
+    {
+      "title": "Launch a Portfolio Website",
+      "resources": [
+        { "name": "Web Portfolio Inspiration Gallery", "url": "https://www.webportfolios.dev" },
+        { "name": "Host Portfolio Free on GitHub Pages", "url": "https://pages.github.com/" }
+      ],
+      "isCompleted": false
+    },
+    {
+      "title": "Prepare Portfolio & Resume",
+      "resources": [
+        { "name": "GitHub Portfolio Inspo", "url": "https://github.com/emmabostian/developer-portfolios" },
+        { "name": "StackOverflow Resume Tips for Developers", "url": "https://stackoverflow.blog/2020/11/25/how-to-write-an-effective-developer-resume-advice-from-a-hiring-manager/" }
+      ],
+      "isCompleted": false
+    }
+  ]
+}
+]
+
+
+
+
